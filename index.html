@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tidonet – Time is Money Calculators</title>
+<meta name="description" content="Free calculators that turn prices into work hours, show how monthly savings grow, and reveal what small daily habits really cost.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%230f1420'/%3E%3Ccircle cx='20' cy='20' r='13' fill='none' stroke='%23f5b544' stroke-width='3'/%3E%3Cpath d='M20 12v8l5 4' fill='none' stroke='%234fd1a5' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- GOOGLE ADSENSE CODE GOES HERE -->
+</head>
+<body>
+<div class="wrap">
+  <header class="site-head">
+    <a class="home" href="index.html" aria-label="Tidonet home">
+      <svg class="logo" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#f5b544" stroke-width="3"/>
+        <path d="M20 10v10l7 5" fill="none" stroke="#4fd1a5" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <div class="brand">tido<span>net</span></div>
+    </a>
+    <nav class="menu">
+      <a href="index.html" class="cur">Tools</a>
+      <a href="guides.html">Guides</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <p class="tag">Time is money. Free calculators that show exactly how much.</p>
+
+  <div class="row-top">
+    <span style="font-size:13px;color:var(--muted)">Currency</span>
+    <select id="cur" aria-label="Currency">
+      <option value="USD">$ USD</option>
+      <option value="EUR">€ EUR</option>
+      <option value="GBP">£ GBP</option>
+      <option value="SEK">kr SEK</option>
+    </select>
+  </div>
+
+  <nav class="tabs">
+    <a href="#work-hours" data-v="work-hours">⏱ Work hours</a>
+    <a href="#grow" data-v="grow">📈 Grow it</a>
+    <a href="#habit" data-v="habit">☕ Habit cost</a>
+  </nav>
+
+  <section class="view card" id="v-work-hours">
+    <h2>How long do you work for it?</h2>
+    <p class="sub">Turn any price into hours of your life.</p>
+    <label for="w-price">Price of the thing</label>
+    <div class="inp"><span class="cs"></span><input id="w-price" type="number" inputmode="decimal" value="1199"></div>
+    <label for="w-wage">Your take-home pay per hour</label>
+    <div class="inp"><span class="cs"></span><input id="w-wage" type="number" inputmode="decimal" value="20"><span>/ hour</span></div>
+    <label for="w-day">Hours in a work day</label>
+    <div class="inp"><input id="w-day" type="number" inputmode="decimal" value="8"><span>hours</span></div>
+    <div class="result">
+      <div class="k">You work</div>
+      <div class="big" id="w-out">–</div>
+      <div class="small" id="w-out2"></div>
+    </div>
+    <div class="hook"><div class="k">Share it</div><p id="w-hook"></p><button data-copy="w-hook">Copy text</button></div>
+  </section>
+
+  <section class="view card" id="v-grow">
+    <h2>What does it grow into?</h2>
+    <p class="sub">Invest a little every month and let time do the work.</p>
+    <label for="g-start">Start amount</label>
+    <div class="inp"><span class="cs"></span><input id="g-start" type="number" inputmode="decimal" value="0"></div>
+    <label for="g-month">Every month</label>
+    <div class="inp"><span class="cs"></span><input id="g-month" type="number" inputmode="decimal" value="100"></div>
+    <label for="g-years">Years: <b id="g-yl">30</b></label>
+    <input id="g-years" type="range" min="1" max="50" value="30">
+    <label for="g-rate">Yearly return: <b id="g-rl">7</b>%</label>
+    <input id="g-rate" type="range" min="0" max="15" step="0.5" value="7">
+    <div class="result">
+      <div class="k">After <span id="g-yk">30</span> years</div>
+      <div class="big" id="g-out">–</div>
+    </div>
+    <div class="split">
+      <div class="mini"><small><span class="dot" style="background:#6b7a9e"></span>You put in</small><b id="g-in">–</b></div>
+      <div class="mini"><small><span class="dot" style="background:#f5b544"></span>Growth</small><b id="g-gain">–</b></div>
+    </div>
+    <svg class="chart" id="g-chart" viewBox="0 0 300 150" preserveAspectRatio="none" role="img" aria-label="Growth per year"></svg>
+    <div class="hook"><div class="k">Share it</div><p id="g-hook"></p><button data-copy="g-hook">Copy text</button></div>
+  </section>
+
+  <section class="view card" id="v-habit">
+    <h2>What does your habit really cost?</h2>
+    <p class="sub">Coffee, snacks, subscriptions. Small daily costs add up.</p>
+    <label for="h-day">Cost per day</label>
+    <div class="inp"><span class="cs"></span><input id="h-day" type="number" inputmode="decimal" value="5"><span>/ day</span></div>
+    <label for="h-years">Years: <b id="h-yl">20</b></label>
+    <input id="h-years" type="range" min="1" max="50" value="20">
+    <label for="h-rate">If invested instead, yearly return: <b id="h-rl">7</b>%</label>
+    <input id="h-rate" type="range" min="0" max="15" step="0.5" value="7">
+    <div class="result">
+      <div class="k">Invested instead, it becomes</div>
+      <div class="big" id="h-out">–</div>
+      <div class="small" id="h-out2"></div>
+    </div>
+    <div class="hook"><div class="k">Share it</div><p id="h-hook"></p><button data-copy="h-hook">Copy text</button></div>
+  </section>
+
+  <h2 class="section-title">Learn the idea behind the numbers</h2>
+  <div class="learn">
+    <a href="compound-interest.html"><b>Compound interest, explained simply</b><span>Why money grows faster the longer you wait, and why starting early beats starting big.</span></a>
+    <a href="price-in-hours.html"><b>Think in hours, not in price tags</b><span>A simple trick that makes every purchase decision clearer.</span></a>
+    <a href="small-habits.html"><b>The real cost of small daily habits</b><span>How a few dollars a day turns into a surprising amount over time.</span></a>
+  </div>
+
+  <h2 class="section-title">Questions</h2>
+  <details><summary>How is the growth calculated?</summary><p>The calculator adds your monthly amount at the end of each month and applies the yearly return divided by twelve every month. That is called monthly compounding. Real investments go up and down, so the result is an estimate, not a promise.</p></details>
+  <details><summary>What return should I use?</summary><p>Many people use 5–8% a year as a long-term example for a broad stock index fund, but past returns do not guarantee future returns. Try a lower number to see a more careful scenario.</p></details>
+  <details><summary>Should I use my salary before or after tax?</summary><p>Use what actually lands in your bank account per hour, after tax. That is the money you really spend, so it gives the most honest answer.</p></details>
+  <details><summary>Do you save what I type?</summary><p>No. Everything is calculated in your own browser. The only thing remembered is your currency choice, stored on your own device. Read more in our <a href="privacy.html">privacy policy</a>.</p></details>
+
+  <footer>
+    <nav><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav>
+    <div>Made by <b>Nostalgicme</b> · Money explained simply</div>
+    <div>For education only. Not financial advice. Returns are never guaranteed.</div>
+    <div>© 2026 Tidonet</div>
+  </footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
