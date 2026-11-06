@@ -5,26 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tidonet – Time is Money Calculators</title>
 <meta name="description" content="Free calculators that turn prices into work hours, show how monthly savings grow, and reveal what small daily habits really cost.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%230f1420'/%3E%3Ccircle cx='20' cy='20' r='13' fill='none' stroke='%23f5b544' stroke-width='3'/%3E%3Cpath d='M20 12v8l5 4' fill='none' stroke='%234fd1a5' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2246%22%20fill%3D%22%23f5b544%22/%3E%3Cpath%20d%3D%22M50%2026%20V50%20L66%2060%22%20fill%3D%22none%22%20stroke%3D%22%230f1420%22%20stroke-width%3D%2210%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="canonical" href="https://tidonet.com/">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9723217552460349" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="wrap">
   <header class="site-head">
     <a class="home" href="index.html" aria-label="Tidonet home">
-      <svg class="logo" viewBox="0 0 40 40" aria-hidden="true">
-        <circle cx="20" cy="20" r="17" fill="none" stroke="#f5b544" stroke-width="3"/>
-        <path d="M20 10v10l7 5" fill="none" stroke="#4fd1a5" stroke-width="3" stroke-linecap="round"/>
-      </svg>
+      <svg class="logo" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="#f5b544"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0f1420" stroke-opacity="0.22" stroke-width="2.5"/><path d="M50 22 V27 M78 50 H73 M50 78 V73 M22 50 H27" stroke="#0f1420" stroke-width="3.5" stroke-linecap="round"/><path d="M50 37 V50 L63 58" fill="none" stroke="#0f1420" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="50" r="4.5" fill="#0f1420"/></svg>
       <div class="brand">tido<span>net</span></div>
     </a>
     <nav class="menu">
       <a href="index.html" class="cur">Tools</a>
+      <a href="hours.html">Hours</a>
       <a href="guides.html">Guides</a>
-      <a href="about.html">About</a>
     </nav>
   </header>
 
@@ -60,7 +59,7 @@
       <div class="big" id="w-out">–</div>
       <div class="small" id="w-out2"></div>
     </div>
-    <div class="hook"><div class="k">Share it</div><p id="w-hook"></p><button data-copy="w-hook">Copy text</button></div>
+    <div class="hook"><div class="k">Share it</div><p id="w-hook"></p><div class="btns"><button data-share="w-hook">Share result</button><button class="ghost" data-copy="w-hook">Copy text</button></div></div>
   </section>
 
   <section class="view card" id="v-grow">
@@ -83,7 +82,7 @@
       <div class="mini"><small><span class="dot" style="background:#f5b544"></span>Growth</small><b id="g-gain">–</b></div>
     </div>
     <svg class="chart" id="g-chart" viewBox="0 0 300 150" preserveAspectRatio="none" role="img" aria-label="Growth per year"></svg>
-    <div class="hook"><div class="k">Share it</div><p id="g-hook"></p><button data-copy="g-hook">Copy text</button></div>
+    <div class="hook"><div class="k">Share it</div><p id="g-hook"></p><div class="btns"><button data-share="g-hook">Share result</button><button class="ghost" data-copy="g-hook">Copy text</button></div></div>
   </section>
 
   <section class="view card" id="v-habit">
@@ -100,7 +99,7 @@
       <div class="big" id="h-out">–</div>
       <div class="small" id="h-out2"></div>
     </div>
-    <div class="hook"><div class="k">Share it</div><p id="h-hook"></p><button data-copy="h-hook">Copy text</button></div>
+    <div class="hook"><div class="k">Share it</div><p id="h-hook"></p><div class="btns"><button data-share="h-hook">Share result</button><button class="ghost" data-copy="h-hook">Copy text</button></div></div>
   </section>
 
   <h2 class="section-title">Learn the idea behind the numbers</h2>
@@ -108,6 +107,13 @@
     <a href="compound-interest.html"><b>Compound interest, explained simply</b><span>Why money grows faster the longer you wait, and why starting early beats starting big.</span></a>
     <a href="price-in-hours.html"><b>Think in hours, not in price tags</b><span>A simple trick that makes every purchase decision clearer.</span></a>
     <a href="small-habits.html"><b>The real cost of small daily habits</b><span>How a few dollars a day turns into a surprising amount over time.</span></a>
+  </div>
+
+  <h2 class="section-title">How many hours is…?</h2>
+  <div class="learn">
+    <a href="hours-iphone-18-pro.html"><b>…an iPhone 18 Pro?</b><span>About 60 hours at $20 an hour.</span></a>
+    <a href="hours-coffee-every-day.html"><b>…a coffee every day?</b><span>91 hours of work a year, at $20 an hour.</span></a>
+    <a href="hours.html"><b>See all items →</b><span>Phones, cars, subscriptions, food and more.</span></a>
   </div>
 
   <h2 class="section-title">Questions</h2>
