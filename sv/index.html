@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tidonet – Tid är pengar: gratis kalkylatorer</title>
+<meta name="description" content="Gratis kalkylatorer som räknar om priser till arbetstimmar, visar hur ett månadssparande växer och vad små dagliga vanor egentligen kostar.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2246%22%20fill%3D%22%23f5b544%22/%3E%3Cpath%20d%3D%22M50%2026%20V50%20L66%2060%22%20fill%3D%22none%22%20stroke%3D%22%230f1420%22%20stroke-width%3D%2210%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="canonical" href="https://tidonet.com/sv/">
+<link rel="alternate" hreflang="sv" href="https://tidonet.com/sv/">
+<link rel="alternate" hreflang="en" href="https://tidonet.com/">
+<link rel="alternate" hreflang="x-default" href="https://tidonet.com/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9723217552460349" crossorigin="anonymous"></script>
+<script data-goatcounter="https://tidonet.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header class="site-head">
+    <a class="home" href="/sv/" aria-label="Tidonet startsida">
+      <svg class="logo" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="#f5b544"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0f1420" stroke-opacity="0.22" stroke-width="2.5"/><path d="M50 22 V27 M78 50 H73 M50 78 V73 M22 50 H27" stroke="#0f1420" stroke-width="3.5" stroke-linecap="round"/><path d="M50 37 V50 L63 58" fill="none" stroke="#0f1420" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="50" r="4.5" fill="#0f1420"/></svg>
+      <div class="brand">tido<span>net</span></div>
+    </a>
+    <nav class="menu">
+      <a href="/sv/" class="cur">Verktyg</a>
+      <a href="/sv/guider.html">Guider</a>
+      <a href="/sv/larry/">Quiz</a>
+      <a href="/" hreflang="en" lang="en" title="English">EN</a>
+    </nav>
+  </header>
+
+  <p class="tag">Tid är pengar. Gratis kalkylatorer som visar exakt hur mycket.</p>
+  <a class="quizban" href="/sv/larry/">
+    <span class="pill">NYTT</span>
+    <b>Är du en Larry eller en Bella? 💸</b>
+    <span>Gör pengatestet med 10 frågor →</span>
+  </a>
+
+  <div class="row-top">
+    <span style="font-size:13px;color:var(--muted)">Valuta</span>
+    <select id="cur" aria-label="Valuta">
+      <option value="SEK">kr SEK</option>
+      <option value="EUR">€ EUR</option>
+      <option value="USD">$ USD</option>
+      <option value="GBP">£ GBP</option>
+    </select>
+  </div>
+
+  <nav class="tabs">
+    <a href="#work-hours" data-v="work-hours">⏱ Arbetstimmar</a>
+    <a href="#grow" data-v="grow">📈 Låt det växa</a>
+    <a href="#habit" data-v="habit">☕ Vanans pris</a>
+  </nav>
+
+  <section class="view card" id="v-work-hours">
+    <h2>Hur länge jobbar du för det?</h2>
+    <p class="sub">Räkna om ett pris till timmar av ditt liv.</p>
+    <label for="w-price">Vad kostar saken?</label>
+    <div class="inp"><span class="cs"></span><input id="w-price" type="number" inputmode="decimal" value="15000"></div>
+    <label for="w-wage">Din timlön efter skatt</label>
+    <div class="inp"><span class="cs"></span><input id="w-wage" type="number" inputmode="decimal" value="170"><span>/ timme</span></div>
+    <label for="w-day">Timmar per arbetsdag</label>
+    <div class="inp"><input id="w-day" type="number" inputmode="decimal" value="8"><span>timmar</span></div>
+    <div class="result">
+      <div class="k">Du jobbar</div>
+      <div class="big" id="w-out">–</div>
+      <div class="small" id="w-out2"></div>
+    </div>
+    <div class="hook"><div class="k">Dela</div><p id="w-hook"></p><div class="btns"><button data-share="w-hook">Dela resultatet</button><button class="ghost" data-copy="w-hook">Kopiera text</button></div></div>
+  </section>
+
+  <section class="view card" id="v-grow">
+    <h2>Vad växer det till?</h2>
+    <p class="sub">Spara lite varje månad och låt tiden göra jobbet.</p>
+    <label for="g-start">Startbelopp</label>
+    <div class="inp"><span class="cs"></span><input id="g-start" type="number" inputmode="decimal" value="0"></div>
+    <label for="g-month">Varje månad</label>
+    <div class="inp"><span class="cs"></span><input id="g-month" type="number" inputmode="decimal" value="1000"></div>
+    <label for="g-years">År: <b id="g-yl">30</b></label>
+    <input id="g-years" type="range" min="1" max="50" value="30">
+    <label for="g-rate">Avkastning per år: <b id="g-rl">7</b> %</label>
+    <input id="g-rate" type="range" min="0" max="15" step="0.5" value="7">
+    <div class="result">
+      <div class="k">Efter <span id="g-yk">30</span> år</div>
+      <div class="big" id="g-out">–</div>
+    </div>
+    <div class="split">
+      <div class="mini"><small><span class="dot" style="background:#6b7a9e"></span>Du satte in</small><b id="g-in">–</b></div>
+      <div class="mini"><small><span class="dot" style="background:#f5b544"></span>Tillväxt</small><b id="g-gain">–</b></div>
+    </div>
+    <svg class="chart" id="g-chart" viewBox="0 0 300 150" preserveAspectRatio="none" role="img" aria-label="Tillväxt per år"></svg>
+    <div class="hook"><div class="k">Dela</div><p id="g-hook"></p><div class="btns"><button data-share="g-hook">Dela resultatet</button><button class="ghost" data-copy="g-hook">Kopiera text</button></div></div>
+  </section>
+
+  <section class="view card" id="v-habit">
+    <h2>Vad kostar din vana egentligen?</h2>
+    <p class="sub">Kaffe, snacks, prenumerationer. Små dagliga kostnader växer.</p>
+    <label for="h-day">Kostnad per dag</label>
+    <div class="inp"><span class="cs"></span><input id="h-day" type="number" inputmode="decimal" value="50"><span>/ dag</span></div>
+    <label for="h-years">År: <b id="h-yl">20</b></label>
+    <input id="h-years" type="range" min="1" max="50" value="20">
+    <label for="h-rate">Om du investerade i stället, avkastning per år: <b id="h-rl">7</b> %</label>
+    <input id="h-rate" type="range" min="0" max="15" step="0.5" value="7">
+    <div class="result">
+      <div class="k">Investerat i stället blir det</div>
+      <div class="big" id="h-out">–</div>
+      <div class="small" id="h-out2"></div>
+    </div>
+    <div class="hook"><div class="k">Dela</div><p id="h-hook"></p><div class="btns"><button data-share="h-hook">Dela resultatet</button><button class="ghost" data-copy="h-hook">Kopiera text</button></div></div>
+  </section>
+
+  <h2 class="section-title">Förstå siffrorna</h2>
+  <div class="learn">
+    <a href="/sv/ranta-pa-ranta.html"><b>Ränta på ränta, enkelt förklarat</b><span>Varför pengar växer snabbare ju längre du väntar.</span></a>
+    <a href="/sv/tank-i-timmar.html"><b>Tänk i timmar, inte i prislappar</b><span>Ett enkelt knep som gör köpbeslut tydligare.</span></a>
+    <a href="/sv/karensavdrag.html"><b>Vad kostar en sjukdag?</b><span>Karensavdrag, sjuklön och läkarintyg, med ett räkneexempel.</span></a>
+    <a href="/sv/guider.html"><b>Alla guider →</b><span>Buffert, ISK och indexfonder, snabblån, prenumerationer och mer.</span></a>
+  </div>
+
+  <h2 class="section-title">Frågor</h2>
+  <details><summary>Hur räknas tillväxten ut?</summary><p>Kalkylatorn lägger till ditt månadsbelopp i slutet av varje månad och räknar med årsavkastningen delad på tolv varje månad. Det kallas månadsvis ränta på ränta. Riktiga investeringar går upp och ner, så resultatet är en uppskattning, inte ett löfte.</p></details>
+  <details><summary>Vilken avkastning ska jag välja?</summary><p>Många använder 5–8 procent per år som ett långsiktigt exempel för en bred indexfond, men historisk avkastning är ingen garanti för framtiden. Testa en lägre siffra för att se ett försiktigare scenario.</p></details>
+  <details><summary>Ska jag använda lönen före eller efter skatt?</summary><p>Använd det som faktiskt kommer in på kontot per timme, alltså efter skatt. Det är de pengarna du spenderar, så det ger det ärligaste svaret.</p></details>
+  <details><summary>Sparar ni det jag skriver?</summary><p>Nej. Allt räknas ut i din egen webbläsare. Det enda som sparas är ditt valutaval, och det sparas på din egen enhet. Läs mer i vår <a href="/privacy.html">integritetspolicy</a> (på engelska).</p></details>
+
+  <a class="shop" href="https://riikola.gumroad.com" rel="noopener">
+    <span class="k">Utskrivbart</span>
+    <b>Savings Tracker Pack</b>
+    <span>Sparmål med 100 mynt, en sparkalender för hela året, en köpfri månad, 52-veckorsutmaningen och en prenumerationskoll. Skriv ut och börja i dag. (Mallarna är på engelska.)</span>
+    <em>Hämta på Gumroad →</em>
+  </a>
+  <footer>
+    <nav><a href="/sv/guider.html">Guider</a><a href="/about.html">Om</a><a href="/contact.html">Kontakt</a><a href="/privacy.html">Integritet</a><a href="https://riikola.gumroad.com" rel="noopener">Butik</a></nav>
+    <div>Gjord av <b>Nostalgicme</b> · Pengar, enkelt förklarat</div>
+    <div>Endast i utbildningssyfte. Inte finansiell rådgivning. Avkastning är aldrig garanterad.</div>
+    <div>© 2026 Tidonet</div>
+  </footer>
+</div>
+<script src="/sv/app.js"></script>
+</body>
+</html>
