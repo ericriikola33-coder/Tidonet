@@ -14,6 +14,9 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://tidonet.com/larry/">
+<link rel="alternate" hreflang="en" href="https://tidonet.com/larry/">
+<link rel="alternate" hreflang="sv" href="https://tidonet.com/sv/larry/">
+<link rel="alternate" hreflang="x-default" href="https://tidonet.com/larry/">
 <link rel="icon" href="/logo.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,12 +64,13 @@
       <svg class="logo" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="#f5b544"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0f1420" stroke-opacity="0.22" stroke-width="2.5"/><path d="M50 22 V27 M78 50 H73 M50 78 V73 M22 50 H27" stroke="#0f1420" stroke-width="3.5" stroke-linecap="round"/><path d="M50 37 V50 L63 58" fill="none" stroke="#0f1420" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="50" r="4.5" fill="#0f1420"/></svg>
       <div class="brand">tido<span>net</span></div>
     </a>
-    <nav class="menu"><a href="/">Tools</a><a href="/hours.html">Hours</a><a href="/larry/" class="cur">Quiz</a></nav>
+    <nav class="menu"><a href="/">Tools</a><a href="/hours.html">Hours</a><a href="/larry/" class="cur">Quiz</a><a href="/sv/larry/" hreflang="sv" lang="sv" title="Svenska">SV</a></nav>
   </header>
 
   <!-- START -->
   <section id="start" class="hero">
     <div id="friend" class="friend hidden"></div>
+    <a id="svban" class="friend hidden" href="/sv/larry/" style="display:block;color:var(--text);text-decoration:none">🇸🇪 Svensk? Gör testet på svenska →</a>
     <div class="center" style="margin-top:14px"><span class="pill">BE HONEST…</span></div>
     <h1>Are you a <span class="l">Larry</span><br>or a <span class="b">Bella</span>?</h1>
     <div class="duo">
@@ -206,6 +210,7 @@
 {q:'Do you have a budget?',a:['A what?',"Sort of. It's in my head.",'Yes, and I actually look at it.']},
 {q:'A shop says: "Buy now, pay later!"',a:['Sounds amazing.','Maybe, for something big.','No thanks. I buy it when I have the money.']}];
   var $=function(id){return document.getElementById(id);};
+  try{ if(/^sv/i.test(navigator.language||'')){ var sb=$('svban'); sb.href='/sv/larry/'+location.search; sb.classList.remove('hidden'); } }catch(e){}
   var i=0, score=0, bellaN=0, larryN=0, last=null, busy=false;
   var RX=[['Classic Larry. 😴','Larry nods slowly. 😴','Larry would be proud. 😴'],['Not bad. Getting there. 😅','A little Larry, a little Bella. 😅'],['Bella approves. ✨','Very Bella of you. ✨',"That's the Bella way. ✨"]];
   function pick(a){return a[Math.floor(Math.random()*a.length)];}
