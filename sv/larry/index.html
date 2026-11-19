@@ -134,6 +134,12 @@
     <p class="count" id="count"></p>
     <p class="count hidden" id="versus" style="color:var(--accent);font-weight:600"></p>
     <div class="btns" style="margin-top:18px"><button id="share">Dela mitt resultat</button><button class="ghost" id="again">Gör om testet</button></div>
+    <a id="offer" class="shop" href="https://riikola.gumroad.com/l/Budgetmall" rel="noopener" style="margin-top:18px">
+      <span class="k" id="offerk">Ditt nästa steg</span>
+      <b>Larry &amp; Bella Budgetmall · 59 kr</b>
+      <span id="offert"></span>
+      <em>Hämta budgetmallen →</em>
+    </a>
     <div class="card" style="margin-top:18px">
       <h2 style="margin:0 0 8px;font-size:19px">Så blir du mer Bella</h2>
       <ul class="tips" id="tips"></ul>
@@ -149,11 +155,11 @@
     </div>
   </section>
 
-  <a class="shop" href="https://riikola.gumroad.com" rel="noopener">
-    <span class="k">Var som Bella</span>
-    <b>Savings Tracker Pack</b>
-    <span>Sparmål med 100 mynt, en sparkalender, en köpfri månad och 52-veckorsutmaningen. Skriv ut och börja i dag. (Mallarna är på engelska.)</span>
-    <em>Hämta på Gumroad →</em>
+  <a class="shop" href="https://riikola.gumroad.com/l/Budgetmall" rel="noopener">
+    <span class="k">Var som Bella · 59 kr</span>
+    <b>Larry &amp; Bella Budgetmall</b>
+    <span>Månadsbudget med sparkvot, prenumerationskoll, sparmål och skuldplan för Excel och Google Sheets.</span>
+    <em>Hämta budgetmallen →</em>
   </a>
 
   <footer>
@@ -252,6 +258,10 @@
     $('count').textContent='Du svarade som Bella '+bellaN+' '+(bellaN===1?'gång':'gånger')+' och som Larry '+larryN+' '+(larryN===1?'gång':'gånger')+'.';
     if(friend!==null){var v=$('versus');v.textContent=pct>friend?'Du slog din vän ('+friend+' % Bella). 🏆':(pct===friend?'Samma resultat som din vän ('+friend+' % Bella).':'Din vän leder med '+friend+' % Bella.');v.classList.remove('hidden');}
     $('tips').innerHTML=r.tips.map(function(t){return '<li>'+t+'</li>';}).join('');
+    var OF={larry:'Larry behöver en plan. Mallen visar var pengarna tar vägen och räknar ut din sparkvot automatiskt, så att du kan gå från Larry till Bella.',
+      mix:'Du är halvvägs. Med budgetmallen ser du varje månad om du är Larry eller Bella, och var de sista kronorna läcker ut.',
+      bella:'Du är redan en Bella. Budgetmallen hjälper dig att hålla koll på sparkvot, sparmål och prenumerationer, så att det fortsätter så.'};
+    $('offert').textContent=OF[key];
     show('result');
   }
   function toast(m){var t=document.createElement('div');t.className='toast show';t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove();},1800);}
