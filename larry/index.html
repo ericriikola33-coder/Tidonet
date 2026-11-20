@@ -134,6 +134,7 @@
     <p class="count" id="count"></p>
     <p class="count hidden" id="versus" style="color:var(--accent);font-weight:600"></p>
     <div class="btns" style="margin-top:18px"><button id="share">Share my result</button><button class="ghost" id="again">Try again</button></div>
+    <button id="savecard" style="width:100%;margin-top:10px;background:#34d27b;color:#0f1420">📸 Save image for your story</button>
     <a id="offer" class="shop" href="https://riikola.gumroad.com/l/budgetplanner" rel="noopener" style="margin-top:18px">
       <span class="k">Your next step</span>
       <b>Larry &amp; Bella Budget Planner · $6</b>
@@ -269,6 +270,10 @@
   function start(){i=0;score=0;bellaN=0;larryN=0;ask();show('quiz');}
   $('go').addEventListener('click',start);
   $('again').addEventListener('click',start);
+  $('savecard').addEventListener('click',function(){
+    var b=$('savecard');b.disabled=true;var o={top:'MY MONEY TEST RESULT',cta:'Can you beat me? 👀',url:'tidonet.com/larry',pctText:last.pct+'% Bella'};o.key=last.key;o.pct=last.pct;o.title=({larry:'I am a Larry 😴',mix:'Half Larry, half Bella 😅',bella:'I am a Bella ✨'})[last.key];
+    shareResultCard(o,{text:'Are you a Larry or a Bella? tidonet.com/larry',hold:'Long-press the image to save it, then add it to your story 📸',download:'Download image',close:'Close'}).then(function(){b.disabled=false;},function(){b.disabled=false;});
+  });
   $('share').addEventListener('click',function(){
     var who = last.key==='larry' ? 'a Larry 😴' : (last.key==='mix' ? 'half Larry, half Bella 😅' : 'a Bella ✨');
     var text='I got '+who+' ('+last.pct+'% Bella) on the money test. Can you beat me?';
@@ -278,5 +283,6 @@
   });
 })();
 </script>
+<script src="/larry/card.js"></script>
 </body>
 </html>

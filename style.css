@@ -106,3 +106,13 @@ button.ghost{background:transparent;color:var(--text);border:1px solid var(--lin
 .quizban{display:block;text-decoration:none;color:var(--text);background:linear-gradient(135deg,#14301f,#171e2e);border:1px solid #23573a;border-radius:16px;padding:14px 16px;margin:0 0 16px}
 .quizban b{display:block;font-family:"Space Grotesk",sans-serif;font-size:19px;margin:8px 0 2px}
 .quizban span:not(.pill){color:#34d27b;font-weight:600;font-size:14.5px}
+
+/* hero with Larry & Bella */
+.hero2{display:block;text-decoration:none;color:var(--text);background:radial-gradient(120% 90% at 50% 0%,#1d3a2b 0%,#171e2e 60%);border:1px solid #23573a;border-radius:20px;padding:16px 14px 18px;margin:0 0 10px;text-align:center}
+.hero2-duo{display:flex;align-items:center;justify-content:center;gap:2px}
+.hero2-duo .hc{width:40%;max-width:170px;height:auto}
+.hero2-duo .hg{filter:drop-shadow(0 0 14px rgba(52,210,123,.45))}
+.hero2-duo .vs{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--accent);font-size:20px}
+.hero2 b{display:block;font-family:"Space Grotesk",sans-serif;font-size:25px;line-height:1.15;margin:6px 0 6px}
+.hero2 .c{color:#34d27b;font-weight:600;font-size:15px}
+.hero2-buy{display:block;text-align:center;color:var(--accent);font-weight:700;font-size:14.5px;text-decoration:none;margin:0 0 16px}

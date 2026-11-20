@@ -134,6 +134,7 @@
     <p class="count" id="count"></p>
     <p class="count hidden" id="versus" style="color:var(--accent);font-weight:600"></p>
     <div class="btns" style="margin-top:18px"><button id="share">Dela mitt resultat</button><button class="ghost" id="again">Gör om testet</button></div>
+    <button id="savecard" style="width:100%;margin-top:10px;background:#34d27b;color:#0f1420">📸 Spara bild till din story</button>
     <a id="offer" class="shop" href="https://riikola.gumroad.com/l/Budgetmall" rel="noopener" style="margin-top:18px">
       <span class="k" id="offerk">Ditt nästa steg</span>
       <b>Larry &amp; Bella Budgetmall · 59 kr</b>
@@ -268,6 +269,10 @@
   function start(){i=0;score=0;bellaN=0;larryN=0;ask();show('quiz');}
   $('go').addEventListener('click',start);
   $('again').addEventListener('click',start);
+  $('savecard').addEventListener('click',function(){
+    var b=$('savecard');b.disabled=true;var o={top:'MITT PENGATEST',cta:'Kan du slå mig? 👀',url:'tidonet.com/sv/larry',pctText:last.pct+' % Bella'};o.key=last.key;o.pct=last.pct;o.title=({larry:'Jag är en Larry 😴',mix:'Halvt Larry, halvt Bella 😅',bella:'Jag är en Bella ✨'})[last.key];
+    shareResultCard(o,{text:'Är du en Larry eller en Bella? tidonet.com/sv/larry',hold:'Håll inne på bilden för att spara den och lägg den sedan i din story 📸',download:'Ladda ner bilden',close:'Stäng'}).then(function(){b.disabled=false;},function(){b.disabled=false;});
+  });
   $('share').addEventListener('click',function(){
     var who = last.key==='larry' ? 'en Larry 😴' : (last.key==='mix' ? 'halvt Larry, halvt Bella 😅' : 'en Bella ✨');
     var text='Jag blev '+who+' ('+last.pct+' % Bella) på pengatestet. Kan du slå mig?';
@@ -277,5 +282,6 @@
   });
 })();
 </script>
+<script src="/larry/card.js"></script>
 </body>
 </html>
