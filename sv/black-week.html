@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Är det ett riktigt fynd? 7 kontroller inför Black Week – Tidonet</title>
+<meta name="description" content="Så avslöjar du falska Black Week-rabatter med 30-dagarsregeln, plus en gratis fyndkoll som visar verklig rabatt och hur många arbetstimmar köpet kostar.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2246%22%20fill%3D%22%23f5b544%22/%3E%3Cpath%20d%3D%22M50%2026%20V50%20L66%2060%22%20fill%3D%22none%22%20stroke%3D%22%230f1420%22%20stroke-width%3D%2210%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="canonical" href="https://tidonet.com/sv/black-week.html">
+<link rel="alternate" hreflang="sv" href="https://tidonet.com/sv/black-week.html">
+<link rel="alternate" hreflang="en" href="https://tidonet.com/black-friday.html">
+<link rel="alternate" hreflang="x-default" href="https://tidonet.com/black-friday.html">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9723217552460349" crossorigin="anonymous"></script>
+<script data-goatcounter="https://tidonet.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header class="site-head">
+    <a class="home" href="/sv/" aria-label="Tidonet startsida">
+      <svg class="logo" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="#f5b544"/><circle cx="50" cy="50" r="34" fill="none" stroke="#0f1420" stroke-opacity="0.22" stroke-width="2.5"/><path d="M50 22 V27 M78 50 H73 M50 78 V73 M22 50 H27" stroke="#0f1420" stroke-width="3.5" stroke-linecap="round"/><path d="M50 37 V50 L63 58" fill="none" stroke="#0f1420" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="50" r="4.5" fill="#0f1420"/></svg>
+      <div class="brand">tido<span>net</span></div>
+    </a>
+    <nav class="menu">
+      <a href="/sv/">Verktyg</a>
+      <a href="/sv/guider.html" class="cur">Guider</a>
+      <a href="/sv/larry/">Quiz</a>
+      <a href="/black-friday.html" hreflang="en" lang="en" title="English">EN</a>
+    </nav>
+  </header>
+
+  <article>
+    <h1>Är det ett riktigt fynd? 7 kontroller inför Black Week</h1>
+    <p class="meta">4 min läsning · Tidonet Guider</p>
+
+    <p>Black Week är veckan då Larry "sparar" mest pengar och ändå blir pank. Stora röda skyltar, nedräkningar och "−70 %" gör att allt känns bråttom. Så här handlar Bella i stället.</p>
+
+    <section class="card" id="dealcheck" style="margin:18px 0">
+      <h2>Fyndkollen: är det ett riktigt fynd?</h2>
+      <p class="sub" style="color:var(--muted);margin:0 0 6px">Fyll i priserna innan du köper. Det gör Bella varje gång.</p>
+      <label for="d-was">"Ordinarie pris" som butiken visar</label>
+      <div class="inp"><span>kr</span><input id="d-was" type="number" inputmode="decimal" value="1999"></div>
+      <label for="d-now">Reapris</label>
+      <div class="inp"><span>kr</span><input id="d-now" type="number" inputmode="decimal" value="1399"></div>
+      <label for="d-low">Lägsta pris senaste 30 dagarna (står vid reapriset, eller kolla prishistorik)</label>
+      <div class="inp"><span>kr</span><input id="d-low" type="number" inputmode="decimal" placeholder="t.ex. 1 290"></div>
+      <label for="d-wage">Din timlön efter skatt</label>
+      <div class="inp"><span>kr</span><input id="d-wage" type="number" inputmode="decimal" value="170"><span>/ timme</span></div>
+      <label style="display:flex;gap:10px;align-items:center;font-size:15px;color:var(--text);margin-top:16px"><input id="d-list" type="checkbox" style="width:22px;height:22px"> Den stod på min lista före rean</label>
+      <label style="display:flex;gap:10px;align-items:center;font-size:15px;color:var(--text)"><input id="d-full" type="checkbox" style="width:22px;height:22px"> Jag hade köpt den till fullpris också</label>
+      <div class="result">
+        <div class="k">Bedömning</div>
+        <div class="big" id="d-v">–</div>
+        <div class="small" id="d-o" style="color:var(--text);margin-top:6px;line-height:1.5"></div>
+      </div>
+    </section>
+    <script>
+    (function(){
+      var L={"loc": "sv-SE", "pre": "", "post": " kr", "claimed": "Butiken säger: −%1 %", "real": "Verklig rabatt mot 30-dagarspriset: −%1 %", "fake": "⚠️ Inte billigare än lägsta priset senaste 30 dagarna. Rabatten är falsk.", "spend": "Du spenderar ändå %1", "hours": " = %1 timmars arbete", "vLarry": "Larry-fälla 😴", "tLarry": "Du sparar inte %1. Du spenderar dem.", "vFake": "Falskt fynd 🚩", "vBella": "Bella-fynd ✨", "vWait": "Vänta ett dygn 🤔"};
+      var $=function(i){return document.getElementById(i);};
+      function n(v){return new Intl.NumberFormat(L.loc,{maximumFractionDigits:0}).format(v);}
+      function m(v){return L.pre+n(v)+L.post;}
+      function run(){
+        var was=parseFloat($('d-was').value)||0, now=parseFloat($('d-now').value)||0, low=parseFloat($('d-low').value), wage=parseFloat($('d-wage').value)||0;
+        var list=$('d-list').checked, full=$('d-full').checked;
+        if(now<=0){$('d-v').textContent='–';$('d-o').innerHTML='';return;}
+        var claimed=was>0?Math.round((1-now/was)*100):0;
+        var real=(low>0)?Math.round((1-now/low)*100):null;
+        var hours=wage>0?now/wage:null;
+        var out=[];
+        out.push(L.claimed.replace('%1',claimed));
+        if(real!==null) out.push(real>0?L.real.replace('%1',real):L.fake);
+        out.push(L.spend.replace('%1',m(now))+(hours!==null?L.hours.replace('%1',new Intl.NumberFormat(L.loc,{maximumFractionDigits:1}).format(hours)):''));
+        var v;
+        if(!list && !full){v=L.vLarry;out.push(L.tLarry.replace('%1',m(now)));}
+        else if(real!==null && real<=0){v=L.vFake;}
+        else if(list && (real===null?claimed>=15:real>=15)){v=L.vBella;}
+        else {v=L.vWait;}
+        $('d-v').textContent=v;$('d-o').innerHTML=out.join('<br>');
+      }
+      ['d-was','d-now','d-low','d-wage','d-list','d-full'].forEach(function(i){$(i).addEventListener('input',run);$(i).addEventListener('change',run);});
+      run();
+    })();
+    </script>
+    <h2>30-dagarsregeln: din bästa vän</h2>
+    <p>Sedan 2022 måste en butik som sänker ett pris visa det <b>lägsta pris varan har haft de senaste 30 dagarna</b>, och rabatten ska räknas från det priset. Står det bara "ordinarie pris" eller "tidigare pris" utan 30-dagarspris ska du vara misstänksam.</p>
+    <p>Men det finns ett kryphål: vissa butiker höjer priset redan i oktober, så att 30-dagarspriset är högt när rean börjar. Därför är det smart att kolla prishistoriken längre tillbaka, gärna ett par månader, på en prisjämförelsesajt.</p>
+    <h2>7 kontroller innan du köper</h2>
+    <ul>
+      <li><b>Stod det på din lista före rean?</b> Om inte är det ingen besparing. Det är en utgift.</li>
+      <li><b>Leta efter 30-dagarspriset</b> och räkna rabatten från det, inte från "ordinarie pris".</li>
+      <li><b>Kolla prishistoriken</b> ett par månader bakåt.</li>
+      <li><b>Räkna om priset till arbetstimmar.</b> En TV för 3 000 kr med 170 kr i timmen är nästan 18 timmar av ditt liv.</li>
+      <li><b>Vänta ett dygn.</b> Vill du fortfarande ha den imorgon är det förmodligen ett riktigt behov.</li>
+      <li><b>Se upp med "köp nu, betala sen".</b> En delbetalning gör att köpet känns mindre. Det är det inte.</li>
+      <li><b>Sätt en budget för hela veckan</b> och sluta när den är slut, hur bra nästa erbjudande än ser ut.</li>
+    </ul>
+    <div class="box"><p><b>Larrys matte:</b> "Jag sparade 3 000 kr!" genom att handla för 9 000 kr som han inte behövde. <b>Bellas matte:</b> en sak från listan, köpt efter ett dygn. Resten av pengarna stannar på sparkontot.</p></div>
+    <a class="cta" href="/sv/larry/">Är du en Larry eller en Bella? Gör testet →</a>
+  </article>
+
+  <a class="shop" href="https://riikola.gumroad.com/l/Budgetmall" rel="noopener">
+    <span class="k">Nyhet · 59 kr</span>
+    <b>Larry &amp; Bella Budgetmall</b>
+    <span>Månadsbudget med sparkvot, prenumerationskoll, sparmål och skuldplan för Excel och Google Sheets. Fyll i de gula rutorna, resten räknas ut automatiskt. Se direkt om du är en Larry eller en Bella.</span>
+    <em>Hämta budgetmallen →</em>
+  </a>
+  <footer>
+    <nav><a href="/sv/guider.html">Guider</a><a href="/about.html">Om</a><a href="/contact.html">Kontakt</a><a href="/privacy.html">Integritet</a><a href="https://riikola.gumroad.com" rel="noopener">Butik</a></nav>
+    <div>Gjord av <b>Nostalgicme</b> · Pengar, enkelt förklarat</div>
+    <div>Endast i utbildningssyfte. Inte finansiell rådgivning. Avkastning är aldrig garanterad.</div>
+    <div>© 2026 Tidonet</div>
+  </footer>
+</div>
+</body>
+</html>
