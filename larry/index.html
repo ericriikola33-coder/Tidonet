@@ -109,6 +109,8 @@
   <circle cx="60" cy="53" r="6" fill="#c8303f"/>
 </svg><div class="name" style="color:#34d27b">BELLA</div><div class="sub">saves first</div></div>
     </div>
+    <p class="center" style="margin:16px 0 4px;font-weight:700">8 money types. Which one are you?</p>
+    <div class="mcchips" id="mcchips"></div>
     <p>10 quick questions about your money habits.<br>Takes about one minute.</p>
     <button id="go">Start the test</button>
     <p class="note center" style="margin-top:12px">Just for fun and learning. Nothing you answer is saved.</p>
@@ -129,12 +131,13 @@
     <div id="rchar" style="margin-top:14px"></div>
     <div class="rtitle" id="rtitle"></div>
     <p class="center" id="rtext" style="color:var(--muted);margin:0 0 6px"></p>
+    <div id="mc"></div>
     <div class="meter"><b id="mark"></b></div>
     <div class="meter-l"><span>Larry</span><span id="pct"></span><span>Bella</span></div>
     <p class="count" id="count"></p>
     <p class="count hidden" id="versus" style="color:var(--accent);font-weight:600"></p>
     <div class="btns" style="margin-top:18px"><button id="share">Share my result</button><button class="ghost" id="again">Try again</button></div>
-    <button id="savecard" style="width:100%;margin-top:10px;background:#34d27b;color:#0f1420">📸 Save image for your story</button>
+    <button id="savecard" style="width:100%;margin-top:10px;background:#34d27b;color:#0f1420">📸 Save my Money Card</button>
     <a id="offer" class="shop" href="https://riikola.gumroad.com/l/budgetplanner" rel="noopener" style="margin-top:18px">
       <span class="k">Your next step</span>
       <b>Larry &amp; Bella Budget Planner · $6</b>
@@ -204,6 +207,7 @@
   <path d="M60 54 L50 68 M60 54 L69 68" stroke="#ef4b5a" stroke-width="5" stroke-linecap="round"/>
   <circle cx="60" cy="53" r="6" fill="#c8303f"/>
 </svg></template>
+<script src="/larry/moneycard.js"></script>
 <script>
 (function(){
   var Q=[{q:'Payday arrives. What happens first?',a:['I treat myself. I earned it.',"I pay the bills, then see what's left.",'I move money to savings before anything else.']},
@@ -218,7 +222,7 @@
 {q:'A shop says: "Buy now, pay later!"',a:['Sounds amazing.','Maybe, for something big.','No thanks. I buy it when I have the money.']}];
   var $=function(id){return document.getElementById(id);};
   try{ if(/^sv/i.test(navigator.language||'')){ var sb=$('svban'); sb.href='/sv/larry/'+location.search; sb.classList.remove('hidden'); } }catch(e){}
-  var i=0, score=0, bellaN=0, larryN=0, last=null, busy=false;
+  var ans=[], MCR=null, i=0, score=0, bellaN=0, larryN=0, last=null, busy=false;
   var RX=[['Classic Larry. 😴','Larry nods slowly. 😴','Larry would be proud. 😴'],['Not bad. Getting there. 😅','A little Larry, a little Bella. 😅'],['Bella approves. ✨','Very Bella of you. ✨',"That's the Bella way. ✨"]];
   function pick(a){return a[Math.floor(Math.random()*a.length)];}
   function shuffled(){var o=[0,1,2];for(var n=2;n>0;n--){var j=Math.floor(Math.random()*(n+1));var x=o[n];o[n]=o[j];o[j]=x;}return o;}
@@ -233,7 +237,7 @@
       var b=document.createElement('button'); b.className='opt'; b.textContent=q.a[k];
       b.addEventListener('click',function(){
         if(busy) return; busy=true;
-        score+=k; if(k===2) bellaN++; if(k===0) larryN++;
+        ans[i]=k; score+=k; if(k===2) bellaN++; if(k===0) larryN++;
         b.classList.add('picked'); $('react').textContent=pick(RX[k]);
         Array.prototype.forEach.call(o.children,function(x){x.disabled=true;});
         $('bar').style.width=((i+1)/Q.length*100)+'%';
@@ -254,8 +258,8 @@
     var pct=Math.round(score/(Q.length*2)*100);
     var key=pct<40?'larry':(pct<70?'mix':'bella'); last={key:key,pct:pct};
     var r=R[key];
-    $('rchar').innerHTML=(key==='larry'?$('larrySvg'):$('bellaSvg')).innerHTML;
-    $('rtitle').textContent=r.t; $('rtext').textContent=r.d;
+    $('rchar').innerHTML=(pct<55?$('larrySvg'):$('bellaSvg')).innerHTML;
+    MCR=MC.render($('mc'),ans,pct,'en'); $('rtitle').textContent=MCR.emoji+' '+MCR.name; $('rtext').textContent=r.d;
     $('mark').style.left=pct+'%'; $('pct').textContent=pct+'% Bella';
     $('count').textContent='You answered like Bella '+bellaN+' time'+(bellaN===1?'':'s')+' and like Larry '+larryN+' time'+(larryN===1?'':'s')+'.';
     if(friend!==null){var v=$('versus');v.textContent=pct>friend?'You beat your friend ('+friend+'% Bella). 🏆':(pct===friend?'Same score as your friend ('+friend+'% Bella).':'Your friend is ahead with '+friend+'% Bella.');v.classList.remove('hidden');}
@@ -267,16 +271,17 @@
     show('result');
   }
   function toast(m){var t=document.createElement('div');t.className='toast show';t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove();},1800);}
-  function start(){i=0;score=0;bellaN=0;larryN=0;ask();show('quiz');}
+  function start(){ans=[];i=0;score=0;bellaN=0;larryN=0;ask();show('quiz');}
+  MC.chips($('mcchips'),'en');
   $('go').addEventListener('click',start);
   $('again').addEventListener('click',start);
   $('savecard').addEventListener('click',function(){
-    var b=$('savecard');b.disabled=true;var o={top:'MY MONEY TEST RESULT',cta:'Can you beat me? 👀',url:'tidonet.com/larry',pctText:last.pct+'% Bella'};o.key=last.key;o.pct=last.pct;o.title=({larry:'I am a Larry 😴',mix:'Half Larry, half Bella 😅',bella:'I am a Bella ✨'})[last.key];
+    var b=$('savecard');b.disabled=true;var LL=MC.L['en'];var o={top:LL.card,cta:LL.cta,url:LL.url,pctText:last.pct+'% Bella',labels:LL.dims,series:LL.series,name:MCR.name,emoji:MCR.emoji,line:MCR.line,color:MCR.color,dims:MCR.dims,no:MCR.no,pct:last.pct,key:last.key};
     shareResultCard(o,{text:'Are you a Larry or a Bella? tidonet.com/larry',hold:'Long-press the image to save it, then add it to your story 📸',download:'Download image',close:'Close'}).then(function(){b.disabled=false;},function(){b.disabled=false;});
   });
   $('share').addEventListener('click',function(){
-    var who = last.key==='larry' ? 'a Larry 😴' : (last.key==='mix' ? 'half Larry, half Bella 😅' : 'a Bella ✨');
-    var text='I got '+who+' ('+last.pct+'% Bella) on the money test. Can you beat me?';
+    var who = MCR.name+' '+MCR.emoji;
+    var text='I got '+who+' ('+last.pct+'% Bella) on the money test. Which money type are you?';
     var url='https://tidonet.com/larry/?f='+last.pct;
     if(navigator.share){ navigator.share({title:'Are you a Larry or a Bella?',text:text,url:url}).catch(function(){}); return; }
     try { navigator.clipboard.writeText(text+' '+url).then(function(){toast('Copied ✓ Paste it anywhere');},function(){toast('Could not copy');}); } catch(e){ toast('Could not copy'); }
