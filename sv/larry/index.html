@@ -274,15 +274,16 @@
   MC.chips($('mcchips'),'sv');
   $('go').addEventListener('click',start);
   $('again').addEventListener('click',start);
+  function cardObj(){var LL=MC.L['sv'];return {top:LL.card,cta:LL.cta,url:LL.url,pctText:last.pct+' % Bella',labels:LL.dims,series:LL.series,name:MCR.name,emoji:MCR.emoji,line:MCR.line,color:MCR.color,dims:MCR.dims,no:MCR.no,pct:last.pct,key:last.key};}
   $('savecard').addEventListener('click',function(){
-    var b=$('savecard');b.disabled=true;var LL=MC.L['sv'];var o={top:LL.card,cta:LL.cta,url:LL.url,pctText:last.pct+' % Bella',labels:LL.dims,series:LL.series,name:MCR.name,emoji:MCR.emoji,line:MCR.line,color:MCR.color,dims:MCR.dims,no:MCR.no,pct:last.pct,key:last.key};
-    shareResultCard(o,{text:'Är du en Larry eller en Bella? tidonet.com/sv/larry',hold:'Håll inne på bilden för att spara den och lägg den sedan i din story 📸',download:'Ladda ner bilden',close:'Stäng'}).then(function(){b.disabled=false;},function(){b.disabled=false;});
+    var b=$('savecard');b.disabled=true;var o=cardObj();
+    saveResultCard(o,{saved:'Sparad i Nedladdningar ✓',hold:'Inte sparad? Håll inne på bilden och välj Ladda ner bild. Lägg den sedan i din story 📸',close:'Stäng'}).then(function(){b.disabled=false;},function(){b.disabled=false;});
   });
   $('share').addEventListener('click',function(){
     var who = MCR.name+' '+MCR.emoji;
     var text='Jag blev '+who+' ('+last.pct+' % Bella) på pengatestet. Vilken pengatyp är du?';
     var url='https://tidonet.com/sv/larry/?f='+last.pct;
-    if(navigator.share){ navigator.share({title:'Är du en Larry eller en Bella?',text:text,url:url}).catch(function(){}); return; }
+    if(navigator.share){ shareCardWithText(cardObj(),'Är du en Larry eller en Bella?',text,url); return; }
     try { navigator.clipboard.writeText(text+' '+url).then(function(){toast('Kopierat ✓ Klistra in var du vill');},function(){toast('Kunde inte kopiera');}); } catch(e){ toast('Kunde inte kopiera'); }
   });
 })();
