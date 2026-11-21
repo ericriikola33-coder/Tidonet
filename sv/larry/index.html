@@ -109,6 +109,8 @@
   <circle cx="60" cy="53" r="6" fill="#c8303f"/>
 </svg><div class="name" style="color:#34d27b">BELLA</div><div class="sub">sparar först</div></div>
     </div>
+    <p class="center" style="margin:16px 0 4px;font-weight:700">8 pengatyper. Vilken är du?</p>
+    <div class="mcchips" id="mcchips"></div>
     <p>10 snabba frågor om dina pengavanor.<br>Tar ungefär en minut.</p>
     <button id="go">Starta testet</button>
     <p class="note center" style="margin-top:12px">Bara för skojs skull och för att lära sig. Inget du svarar sparas.</p>
@@ -129,12 +131,13 @@
     <div id="rchar" style="margin-top:14px"></div>
     <div class="rtitle" id="rtitle"></div>
     <p class="center" id="rtext" style="color:var(--muted);margin:0 0 6px"></p>
+    <div id="mc"></div>
     <div class="meter"><b id="mark"></b></div>
     <div class="meter-l"><span>Larry</span><span id="pct"></span><span>Bella</span></div>
     <p class="count" id="count"></p>
     <p class="count hidden" id="versus" style="color:var(--accent);font-weight:600"></p>
     <div class="btns" style="margin-top:18px"><button id="share">Dela mitt resultat</button><button class="ghost" id="again">Gör om testet</button></div>
-    <button id="savecard" style="width:100%;margin-top:10px;background:#34d27b;color:#0f1420">📸 Spara bild till din story</button>
+    <button id="savecard" style="width:100%;margin-top:10px;background:#34d27b;color:#0f1420">📸 Spara mitt pengakort</button>
     <a id="offer" class="shop" href="https://riikola.gumroad.com/l/Budgetmall" rel="noopener" style="margin-top:18px">
       <span class="k" id="offerk">Ditt nästa steg</span>
       <b>Larry &amp; Bella Budgetmall · 59 kr</b>
@@ -204,6 +207,7 @@
   <path d="M60 54 L50 68 M60 54 L69 68" stroke="#ef4b5a" stroke-width="5" stroke-linecap="round"/>
   <circle cx="60" cy="53" r="6" fill="#c8303f"/>
 </svg></template>
+<script src="/larry/moneycard.js"></script>
 <script>
 (function(){
   var Q=[{q:'Lönen kommer. Vad händer först?',a:['Jag unnar mig något. Jag har förtjänat det.','Jag betalar räkningarna och ser vad som blir kvar.','Jag flyttar pengar till sparandet innan allt annat.']},
@@ -217,7 +221,7 @@
 {q:'Har du en budget?',a:['En vad?','Typ. Den finns i huvudet.','Ja, och jag tittar faktiskt på den.']},
 {q:'En butik säger: "Köp nu, betala sen!"',a:['Låter perfekt.','Kanske, för något stort.','Nej tack. Jag köper när jag har pengarna.']}];
   var $=function(id){return document.getElementById(id);};
-  var i=0, score=0, bellaN=0, larryN=0, last=null, busy=false;
+  var ans=[], MCR=null, i=0, score=0, bellaN=0, larryN=0, last=null, busy=false;
   var RX=[['Klassisk Larry. 😴','Larry nickar långsamt. 😴','Larry skulle vara stolt. 😴'],['Inte illa. Du är på väg. 😅','Lite Larry, lite Bella. 😅'],['Bella godkänner. ✨','Väldigt Bella av dig. ✨','Så gör Bella. ✨']];
   function pick(a){return a[Math.floor(Math.random()*a.length)];}
   function shuffled(){var o=[0,1,2];for(var n=2;n>0;n--){var j=Math.floor(Math.random()*(n+1));var x=o[n];o[n]=o[j];o[j]=x;}return o;}
@@ -232,7 +236,7 @@
       var b=document.createElement('button'); b.className='opt'; b.textContent=q.a[k];
       b.addEventListener('click',function(){
         if(busy) return; busy=true;
-        score+=k; if(k===2) bellaN++; if(k===0) larryN++;
+        ans[i]=k; score+=k; if(k===2) bellaN++; if(k===0) larryN++;
         b.classList.add('picked'); $('react').textContent=pick(RX[k]);
         Array.prototype.forEach.call(o.children,function(x){x.disabled=true;});
         $('bar').style.width=((i+1)/Q.length*100)+'%';
@@ -253,8 +257,8 @@
     var pct=Math.round(score/(Q.length*2)*100);
     var key=pct<40?'larry':(pct<70?'mix':'bella'); last={key:key,pct:pct};
     var r=R[key];
-    $('rchar').innerHTML=(key==='larry'?$('larrySvg'):$('bellaSvg')).innerHTML;
-    $('rtitle').textContent=r.t; $('rtext').textContent=r.d;
+    $('rchar').innerHTML=(pct<55?$('larrySvg'):$('bellaSvg')).innerHTML;
+    MCR=MC.render($('mc'),ans,pct,'sv'); $('rtitle').textContent=MCR.emoji+' '+MCR.name; $('rtext').textContent=r.d;
     $('mark').style.left=pct+'%'; $('pct').textContent=pct+' % Bella';
     $('count').textContent='Du svarade som Bella '+bellaN+' '+(bellaN===1?'gång':'gånger')+' och som Larry '+larryN+' '+(larryN===1?'gång':'gånger')+'.';
     if(friend!==null){var v=$('versus');v.textContent=pct>friend?'Du slog din vän ('+friend+' % Bella). 🏆':(pct===friend?'Samma resultat som din vän ('+friend+' % Bella).':'Din vän leder med '+friend+' % Bella.');v.classList.remove('hidden');}
@@ -266,16 +270,17 @@
     show('result');
   }
   function toast(m){var t=document.createElement('div');t.className='toast show';t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove();},1800);}
-  function start(){i=0;score=0;bellaN=0;larryN=0;ask();show('quiz');}
+  function start(){ans=[];i=0;score=0;bellaN=0;larryN=0;ask();show('quiz');}
+  MC.chips($('mcchips'),'sv');
   $('go').addEventListener('click',start);
   $('again').addEventListener('click',start);
   $('savecard').addEventListener('click',function(){
-    var b=$('savecard');b.disabled=true;var o={top:'MITT PENGATEST',cta:'Kan du slå mig? 👀',url:'tidonet.com/sv/larry',pctText:last.pct+' % Bella'};o.key=last.key;o.pct=last.pct;o.title=({larry:'Jag är en Larry 😴',mix:'Halvt Larry, halvt Bella 😅',bella:'Jag är en Bella ✨'})[last.key];
+    var b=$('savecard');b.disabled=true;var LL=MC.L['sv'];var o={top:LL.card,cta:LL.cta,url:LL.url,pctText:last.pct+' % Bella',labels:LL.dims,series:LL.series,name:MCR.name,emoji:MCR.emoji,line:MCR.line,color:MCR.color,dims:MCR.dims,no:MCR.no,pct:last.pct,key:last.key};
     shareResultCard(o,{text:'Är du en Larry eller en Bella? tidonet.com/sv/larry',hold:'Håll inne på bilden för att spara den och lägg den sedan i din story 📸',download:'Ladda ner bilden',close:'Stäng'}).then(function(){b.disabled=false;},function(){b.disabled=false;});
   });
   $('share').addEventListener('click',function(){
-    var who = last.key==='larry' ? 'en Larry 😴' : (last.key==='mix' ? 'halvt Larry, halvt Bella 😅' : 'en Bella ✨');
-    var text='Jag blev '+who+' ('+last.pct+' % Bella) på pengatestet. Kan du slå mig?';
+    var who = MCR.name+' '+MCR.emoji;
+    var text='Jag blev '+who+' ('+last.pct+' % Bella) på pengatestet. Vilken pengatyp är du?';
     var url='https://tidonet.com/sv/larry/?f='+last.pct;
     if(navigator.share){ navigator.share({title:'Är du en Larry eller en Bella?',text:text,url:url}).catch(function(){}); return; }
     try { navigator.clipboard.writeText(text+' '+url).then(function(){toast('Kopierat ✓ Klistra in var du vill');},function(){toast('Kunde inte kopiera');}); } catch(e){ toast('Kunde inte kopiera'); }
