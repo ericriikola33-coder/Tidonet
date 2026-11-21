@@ -61,6 +61,32 @@
       return new Promise(function(res){cv.toBlob(res,'image/png');});
     });
   };
+
+  function overlay(url,labels,saved){
+    var ov=document.createElement('div');
+    ov.style.cssText='position:fixed;inset:0;background:rgba(5,8,18,.94);z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;gap:12px';
+    ov.innerHTML=(saved?'<p style="color:#34d27b;font-weight:700;margin:0">'+saved+'</p>':'')+'<img src="'+url+'" alt="" style="max-height:68vh;max-width:100%;border-radius:16px">'+
+      '<p style="color:#fff;margin:0;text-align:center">'+labels.hold+'</p>'+
+      '<button class="ghost" style="max-width:240px">'+labels.close+'</button>';
+    ov.querySelector('button').onclick=function(){ov.remove();};
+    document.body.appendChild(ov);
+  }
+  /* Save button: download the PNG straight to the phone and show it (long-press works too). */
+  window.saveResultCard=function(o,labels){
+    return makeResultCard(o).then(function(blob){
+      var url=URL.createObjectURL(blob);
+      try{var a=document.createElement('a');a.href=url;a.download='my-money-card.png';document.body.appendChild(a);a.click();a.remove();}catch(e){}
+      overlay(url,labels,labels.saved);
+    });
+  };
+  /* Share button: share the card image (so Instagram Stories shows up) plus the text and link. */
+  window.shareCardWithText=function(o,title,text,url){
+    return makeResultCard(o).then(function(blob){
+      var f=null;try{f=new File([blob],'my-money-card.png',{type:'image/png'});}catch(e){}
+      if(f&&navigator.canShare&&navigator.canShare({files:[f]}))return navigator.share({files:[f],text:text+' '+url}).catch(function(){});
+      return navigator.share({title:title,text:text,url:url}).catch(function(){});
+    });
+  };
   window.shareResultCard=function(o,labels){
     return makeResultCard(o).then(function(blob){
       var file=null;try{file=new File([blob],'my-money-card.png',{type:'image/png'});}catch(e){}
